@@ -80,7 +80,7 @@ class LoginsController < ApplicationController
 end
 
 
-10. Define the helper methods  in applicaiton_controller.rb
+10. Define the helper methods  in applicaiton.rb
 
  # this is to make there methods available to the views to be used.
   helper_method :current_user, :logged_in?
