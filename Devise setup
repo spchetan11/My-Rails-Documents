@@ -1,0 +1,46 @@
+
+Installation-
+
+1.rails generate devise:install
+
+2.rails generate devise User
+
+FIRST THING - DONT CREATE ANY USER. GO TO views/users/index.html.erb and change the 'New User' link to 'new_user_registration_path'. AND ALWAYS USE localhost:3000/users/sign_up for creating new user.
+
+SECOND THING - ADD SIGN_OUT BUTTON. https://github.com/plataformatec/devise/wiki/How-To:-Add-sign_in,-sign_out,-and-sign_up-links-to-your-layout-template (after generating devise views)
+
+THIRD THING - ADD THIS CONDITION IN views/users/index.html.erb or where ever needed.
+
+<%if !user_signed_in?%>
+<%= link_to 'New User', new_user_registration_path %>
+<%end%>
+
+FOURTH THING - TO RENDER CUSTOM PAGE AFTER SIGN UP - https://github.com/plataformatec/devise/wiki/How-To:-Redirect-to-a-specific-page-on-successful-sign-up-(registration)
+
+ 
+CUSTOM FIELDS FOR SIGNUP! :
+
+1. generate devise views and controllers.
+
+rails generate devise:views
+rails generate devise:controllers users
+
+2.Tell the router to use this controller
+
+devise_for :users, controllers: { registrations: 'users/registrations' }
+
+3. Override devise controller. Paste below code in application_controller.rb and users/registrations_controller.rb
+
+  before_filter :configure_permitted_parameters, :only => [:create]
+
+  protected
+
+    def configure_permitted_parameters
+       devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :password])
+    end
+
+4. Add the required custom fields in devise views. views/devise/registrations/new.html.erb
+
+
+
+NOW, ADD SIGN_OUT BUTTON to layout. https://github.com/plataformatec/devise/wiki/How-To:-Add-sign_in,-sign_out,-and-sign_up-links-to-your-layout-template

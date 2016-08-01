@@ -1,0 +1,42 @@
+1. install these gems
+
+
+gem 'bootstrap-sass', '~> 3.3.5.1'
+gem 'autoprefixer-rails'
+gem 'sass-rails', '~> 5.0', '>= 5.0.4'
+gem "font-awesome-rails"
+gem 'sprockets', '~> 3.5', '>= 3.5.2'
+
+2. We will rename "app/assets/stylesheets/application.css" to "app/assets/stylesheets/application.css.sass"
+
+3. open application.css.scss and paste the following.
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+
+4. Go to "app/assets/javascripts/application.js" and paste  //= require bootstrap-sprockets   
+
+It should be pasted right above  "//-require tree ." and after all jquery lines.
+
+5. add the following in config.ru
+
+require ::File.expand_path('../config/environment', __FILE__)
+require 'bootstrap-sass'
+run Rails.application
+
+6. copy all css javascript and images from downloaded template folder to your assets folder respectively.
+
+7. go to the index page html code ctrl+f = "src" and change all "src"="img/.." to "assets/.."
+
+8. repeat the above step for assets/stylesheets/  yourtemplatename.css and yourtemplatename.scss
+
+9. copy other files from template folder if needed.
+
+------------------------------------------------
+
+
+
+DONE!
+
+

@@ -1,0 +1,82 @@
+1. go to user model and add 
+
+   has_secure_password
+
+2. add password_digest to user table to store bcrypt hash of the password to be stored.
+
+   rails g migration add_password_digest_to_user
+
+   add_column :chefs, :password_digest, :string
+
+   rake db:migrate
+
+3. add bcrypt gem in gem file.
+
+   gem 'bcrypt'
+
+4. bundle install
+
+NOTE- no need to create 'password' field for user table. It will be available virtually and you can use 'password'.
+
+5. Go to rails console. if you have a user without a password digest.
+
+   user=User.first
+   user.password = 'enteryourpassword'
+   user.save
+   user.authenticate('enteryourpassword')
+
+this will return the user object for that user.
+
+6. You will need to create a login controller and form.
+
+   rails g controller logins
+
+7. Add the routes
+
+  get '/login', to: 'logins#new'
+
+  post '/login', to: 'logins#create'
+
+  get '/logout', to: 'logins#destroy'
+
+8. Create new.html.erb for login form
+  
+<%=form_tag '/login' do%>
+      <%=label_tag :email%>
+      <%=text_field_tag :email%>
+
+      <%=label_tag :password%>
+      <%=password_field_tag :password%>
+      <br/><br/>
+<%=submit_tag 'Login', class: 'btn btn-success'%>
+
+9. Logins controller.
+
+class LoginsController < ApplicationController
+
+	def new
+		
+	end
+
+	def create
+		chef = Chef.find_by(email: params[:email])
+		session[:id] = chef.id
+		if chef && chef.authenticate(params[:password])
+		  flash[:success] = "You are logged in"
+		  redirect_to recipes_path
+		else
+		  flash.now[:danger] = "Your email address of password doesn't match"
+		  redirect_to :back
+		end
+	end
+
+	def destroy
+		session[:id] = nil
+		flash[:success] = "Your have logged out"
+		redirect_to root_path
+	end
+
+end
+
+
+   

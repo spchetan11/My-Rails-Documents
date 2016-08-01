@@ -1,0 +1,137 @@
+GIT
+1. Login to github in terminal.CHECK Configuring Git (https://gorails.com/setup/ubuntu/14.04)
+
+2. go to github.com, login and create a repository.
+
+3. leave the url in SSH. If ssh is not added to git then generate ssh for that pc and add it to github.
+
+4. go to your project directory in terminal and do the following.
+
+-git init
+-git add .
+-git commit -m "Initial commit"
+
+next copy the next 2 lines from the github page after creating repo.
+
+…or push an existing repository from the command line
+-git remote add origin git@github.com:spchetan11/bootstrap_demo_application.git
+-git push -u origin master
+
+DONE. 
+
+----------
+To remove remote origin, run the following.
+
+-git remote -v
+-git remote remove origin
+
+
+
+WORKING WITH BRANCHES. 
+
+switch to topic branch
+
+1. git checkout -b yourbranchnamethatyouwant
+2. git branch
+
+after doing work:
+
+3. git add .
+4. git commit -am "added files"
+
+now switch to master branch and merge topic branch code to master branch
+
+5. git checkout master
+6. git merge yourbranchnamethatyouwant
+
+delete the topic branch 
+
+7. git branch -d yourbranchname
+8. git branch
+
+NOTE: use -D to delete branch and not save the code.
+
+
+
+HEROKU-
+
+1. Install heroku toolbelt if not installed. Run the below line in terminal.
+
+https://toolbelt.heroku.com/install-ubuntu.sh
+
+
+
+2. heroku version
+
+3. heroku login
+
+4. heroku keys:add
+
+5. heroku create (in the root of your project)
+
+6. git commit -am "initial commit"
+
+7. Change default web server(single threaded) to suggested(multithreaded) web server. Create PROCFILE.
+
+CHECK HERE - https://devcenter.heroku.com/articles/ruby-default-web-server 
+
+create a file called 'Procfile' in the main project folder, along side gemfile. and paste the procfile content in it.
+
+create puma.rb in config/puma.rb and paste the contents in it.
+
+gem 'puma'
+
+for this gem add the below lines to bin/rails right above require 'rails/commands'
+
+require 'rack/handler'
+Rack::Handler::WEBrick = Rack::Handler.get(:puma)
+
+
+8. Go to gemfile.
+
+ gem 'puma'
+  
+ gem 'sprockets', '~> 3.0' 
+
+ group :development do
+
+   gem 'sqlite3'
+
+ end
+
+ group :production do
+
+   ruby '2.2.4'
+
+   gem 'pg'
+   
+   gem 'yui-compressor'
+
+   gem 'rails_12factor'
+ end
+  
+9. Go to Production.rb and config.assets.compile = true
+
+
+10. precompile assets. - RAILS_ENV=production bundle exec rake assets:precompile
+
+
+  bundle install
+  git add .
+  git commit -am "message"
+- git push origin master
+
+
+11. git push heroku master
+
+12. Add heroku remote. For an app named 'falling-wind-1624'
+
+-heroku git:remote -a falling-wind-1624
+-git remote -v 
+-git remote rm heroku
+
+NOTE- heroku rename 'any name you want'
+      
+
+
+

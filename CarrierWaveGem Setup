@@ -1,0 +1,80 @@
+Carrierwave gem:
+
+add the gems:
+
+gem 'carrierwave'
+gem 'mini_magick'
+
+Go to environment.rb and add - require 'carrierwave/orm/activerecord'
+
+1. rails generate uploader Picture
+
+this creates uploader/picture_uploader.rb
+
+Uncomment 'extension_white_list' method in this file.
+
+2. rails generate migration add_picture_to_the_table_you_want picture:string
+
+this adds migration file with add_column :table, :picture, :string
+
+3. rake db:migrate
+
+4. Go to your model and add
+
+mount_uploader :picture, PictureUploader
+
+5. Go add the form field to upload image in the view or _form
+
+add multipart: true -- <%=form_for (@recipe, html: {multipart: true}) do |f|%>
+
+<%=f.file_field :picture%>
+
+6. Go to your controller and add :picture to strong parameters whitelist.
+
+7. Render your image!
+
+ <%= image_tag(recipe.picture.url, size: "250x150", class: "gravatar") if recipe.picture? %>
+
+here this is the index.html.erb and recipe is the current iterated object. (<%@recipes.each do |recipe| %>)
+
+8. Enforce validations for pictures sizes in client side and server side.
+
+ In Model -
+
+    validate :picture_size
+
+    private 
+     def picture_size
+     	if picture.size > 5.megabytes
+     		errors.add(:picture, "should be less than 5MB")
+     	end
+     end
+
+ In form - 
+
+   <script type = "text/javascript">
+ $(document).ready(function(){
+ 	$('#recipe_picture').bind('change', function(){
+ 		size_in_megabytes = this.files[0].size/1024/1024;
+ 		if(size_in_megabytes > 5) {
+ 			alert("Maximum file size is 5MB. Please choose a smaller file");
+ 		}
+ 	});
+
+ });
+</script>
+
+9. Adding imageMagik for image resizing.
+
+sudo apt-get update
+sudo apt-get install imagemagick --fix-missing
+
+10. go to uploaders/picture_uploader.rb add the following since we installed image magick
+
+include CarrierWave::MiniMagick
+
+process resize_to_limit: [600,600]
+
+
+
+

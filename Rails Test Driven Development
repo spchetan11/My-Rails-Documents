@@ -1,0 +1,11 @@
+Test Driven Development.
+
+1. Go to README.rdoc and list out the Test specs for each model and its elements and watch the tests fail. run rake test
+      
+2. Go to the model and define the validations for each element. (do this for each element individually)
+
+3. Go to Test-Model-respective model and write tests.
+
+4. Run tests. Run the below command in the root of you project.
+
+ rake test
