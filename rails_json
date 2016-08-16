@@ -1,0 +1,20 @@
+ POSTMAN--
+
+1. use this url in postman.   http://localhost:3000/users
+
+2. in postman add - header: Content-Type, value: application/json
+
+3. Refer active_model_serializers project, users controller for the render json formats
+
+4. add  skip_before_filter :verify_authenticity_token in controller. 
+
+
+ ACTIVE MODEL SERIALIZERS-
+
+1. gem "active_model_serializers"
+
+2. rails g serializer user
+
+3. go to serializers->user_serializer.rb and add your desired attributes to output
+
+4. render json: @user, root: false (to disable root 'user' node and show like default rails json output)
