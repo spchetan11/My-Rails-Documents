@@ -1,0 +1,14 @@
+1. rails new myApp --api (Refer to the active_model_serializers_rails_5_api app)
+
+2. follow this guide.  http://sourcey.com/building-the-prefect-rails-5-api-only-app/
+
+3. add active_model_serializers gem and configure it. refer to rails_json.txt file in documents.
+
+4. in postman in postman add - 
+ 
+   header: Content-Type, value: application/json
+
+   (if using authorization from the guide above use below line. copy token value from the user record.)
+   header: Authorization, value: Token token=A78qr4NE9ixjXdbR8UMsBQtt
+
+               
