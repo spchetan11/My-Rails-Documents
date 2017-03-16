@@ -1,0 +1,13 @@
+to open psql#
+
+  sudo -u postgres psql
+
+to restart psql server
+
+  sudo service postgresql restart
+
+rails db
+
+\dt - to list all tables
+
+select * from table_name; any table from the list.

@@ -1,0 +1,18 @@
+https://www.youtube.com/watch?v=TY6cy3qwfBw
+
+1. heroku config
+
+2. set new variable
+
+   heroku config:set MVAAYOO_USERNAME=chet@gmail.com
+
+you can use MVAAYOO_USERNAME now.
+
+similarly set for other keys too.
+
+Example. config/initializers/mvaayoo.rb
+
+MVAAYOO_USER = ENV['MVAAYOO_USERNAME']
+MVAAYOO_PASSWORD = ENV['MVAAYOO_PASSWORD']
+SENDER_ID = ENV['MVAAYOO_SENDER_ID']
+

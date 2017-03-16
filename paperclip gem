@@ -1,0 +1,19 @@
+https://github.com/thoughtbot/paperclip
+http://codeonhill.com/paperclip-and-imagemagick-for-images-in-rails/
+
+
+make sure image magick is installed - sudo apt-get install imagemagick -y
+
+gem "paperclip", "~> 5.0.0"
+
+bundle install
+
+rails g paperclip post image  [here post is the model you want to add image to. it create 'image' column to the post table/model]
+
+go to the paperclip github page, quick start section - copy the Model example code and paste in your model.
+
+ACTIVE ADMIN - 
+
+TO add choose file button in active admin check out the code in portfolio/app/admin/post.rb
+
+

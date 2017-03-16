@@ -7,7 +7,7 @@ gem 'sass-rails', '~> 5.0', '>= 5.0.4'
 gem "font-awesome-rails"
 gem 'sprockets', '~> 3.5', '>= 3.5.2'
 
-2. We will rename "app/assets/stylesheets/application.css" to "app/assets/stylesheets/application.css.sass"
+2. We will rename "app/assets/stylesheets/application.css" to "app/assets/stylesheets/application.css.scss"
 
 3. open application.css.scss and paste the following.
 
